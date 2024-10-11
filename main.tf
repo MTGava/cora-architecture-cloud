@@ -7,9 +7,27 @@ provider "aws" {
     token      = "${var.session_token}"
 }
 
-# Criar um S3 bucket para armazenar imagens/audio para o Rekognition e Polly processar
+# Cria um S3 bucket para armazenar imagens para o AWS Rekognition processar
 resource "aws_s3_bucket" "cora_image_bucket" {
   bucket = "cora-image-bucket"
+  acl    = "private"
+
+  versioning {
+    enabled = true
+  }
+
+  lifecycle_rule {
+    enabled = true
+
+    expiration {
+      days = 30
+    }
+  }
+}
+
+# Cria um S3 bucket para armazenar audio para a AWS Polly processar
+resource "aws_s3_bucket" "cora_audio_bucket" {
+  bucket = "cora-audio-bucket"
   acl    = "private"
 
   versioning {
