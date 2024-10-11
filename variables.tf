@@ -15,10 +15,6 @@ variable "session_token" {
     description = "Session token to AWS console"
 }
 
-variable "region" {
-    description = "AWS region"
-}
-
 variable "bucket_name" {
   description = "S3 Bucket for Cora"
   default     = "cora-bucket"
